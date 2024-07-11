@@ -134,7 +134,7 @@ router.get("/:id/orders", authUser, async function (req, res, next) {
 });
 
 router.post("/:id/orders", authUser, async function (req, res, next) {
-    const { customer_id, quantity } = req.body;
+    const { quantity } = req.body;
     const id = req.params.id;
     
     try {
@@ -145,7 +145,7 @@ router.post("/:id/orders", authUser, async function (req, res, next) {
       const totalPrice = product.price * quantity;
   
       const order = await Order.create({
-        customer_id,
+
         product_id: id,
         quantity,
         totalPrice,

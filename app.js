@@ -18,10 +18,13 @@ var approveRouter = require('./routes/approve');
 var orderRouter = require('./routes/orders');
 
 
+
 const { count } = require('console');
 const { default: mongoose } = require('mongoose');
 
 var app = express();
+var cors = require('cors')
+app.use(cors())
 
 // const mongoose = require('mongoose')
 // const { DB_HOST, DB_PORT, DB_NAME } = process.env;

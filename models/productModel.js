@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
+    // product_image: {
+    //     type: String,
+    // },
     product_name: { 
         type: String,
         require: true,

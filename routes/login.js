@@ -38,13 +38,6 @@ router.post("/", async function (req, res, next) {
         data: [{ validUser }],
       });
 
-    // if (!validUser)
-    //   return res.status(400).send({
-    //     status: 400,
-    //     message: "Username or Password is incorrect",
-    //     data: [{ validUser }],
-    // });
-
     let isMatch = await bcrypt.compare(password, validUser.password);
 
     if (!isMatch)

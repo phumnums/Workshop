@@ -10,25 +10,20 @@ const authAdmin = async (req, res, next) => {
         error: true,
       });
 
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken)
-      return res.status(401).json({
-        message: "Unauthorized. Please authenticate.",
-        error: true,
-      });
-
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     if (!decoded)
       return res.status(403).json({
         message: "Forbidden",
         error: true,
       });
+
     const user = await User.findOne({ _id: decoded._id });
     if (!user)
       return res.status(401).json({
         message: "Unauthorized. Please authenticate.",
         error: true,
       });
+
     if (user?.role !== "admin")
       return res
         .status(403)
@@ -45,8 +40,7 @@ const authAdmin = async (req, res, next) => {
 
 module.exports = authAdmin;
 
-// const User = require('../models/userModel');
-// const jwt = require('jsonwebtoken');
+
 
 // const authAdmin = async(req, res, next) => {
 //     try {

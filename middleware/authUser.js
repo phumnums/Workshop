@@ -11,13 +11,6 @@ const authUser = async (req, res, next) => {
         error: true,
       });
 
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken)
-      return res.status(401).json({
-        message: "Unauthorized. Please authenticate.",
-        error: true,
-      });
-
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     if (!decoded)
       return res.status(403).json({
@@ -26,7 +19,7 @@ const authUser = async (req, res, next) => {
       });
 
     const user = await User.findOne({ _id: decoded._id });
-
+    
     if (!user)
       return res.status(401).json({
         status: 401,
