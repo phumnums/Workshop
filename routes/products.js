@@ -50,8 +50,9 @@ router.get("/:id", async function (req, res, next) {
 /* POST /api/v1/products */
 router.post("/", authAdmin, async function (req, res, next) {
   try {
-    const { product_name, price, amount } = req.body;
+    const { product_image, product_name, price, amount } = req.body;
     let newProduct = new Product({
+      product_image,
       product_name,
       price,
       amount,
@@ -74,9 +75,10 @@ router.post("/", authAdmin, async function (req, res, next) {
 /* PUT /api/v1/products/:id */
 router.put("/:id", authAdmin, async function (req, res, next) {
   try {
-    const { product_name, price, amount } = req.body;
+    const { product_image, product_name, price, amount } = req.body;
     let id = req.params.id;
     let product = await Product.findByIdAndUpdate(id, {
+      product_image,
       product_name,
       price,
       amount,
